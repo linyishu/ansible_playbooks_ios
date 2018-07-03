@@ -1,0 +1,11 @@
+---
+- hosts: csr_01
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: change hostname
+      ios_config:
+        lines:
+          - hostname csr_01
+          - ntp server 8.8.8.8
