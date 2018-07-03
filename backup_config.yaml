@@ -1,0 +1,21 @@
+---
+- hosts: csr_01
+  gather_facts: ture
+  connection: local
+
+  tasks:
+   - name: show run
+     ios_command:
+       commands:
+         - show run
+       host: "{{ ansible_host }}"
+       username: "a.billy.lin"
+       password: "a.billy.lin.test"
+       authorize: yes
+       auth_pass: "a.billy.lin.test"
+     register: config
+
+   - name: save output to /etc/ansible/playbooks/results
+     copy:
+       content: "{{ config.stdout[0] }}"
+       dest: "/etc/ansible/playbooks/results/config_{{ inventory_hostname }}.txt"
