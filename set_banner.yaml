@@ -1,0 +1,14 @@
+---
+- hosts: csr_01
+  gather_facts: false
+  connection: local
+
+  tasks:
+   - name: configure login banner
+     ios_banner:
+       banner: login
+       text: |
+         this is a login banner
+         try to test
+         string
+       state: present
