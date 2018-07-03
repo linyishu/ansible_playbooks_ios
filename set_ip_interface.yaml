@@ -1,0 +1,12 @@
+---
+- hosts: csr_01
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: set ip for interface
+      ios_config:
+        lines:
+          - description set_by_ansible
+          - ip address 192.168.1.1 255.255.255.0
+        parents: Interface GigabitEthernet 1
